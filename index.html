@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>naberol. — Contable</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+
+<!-- LOADING -->
+<div id="loading">
+  <div class="loading-logo">
+    <svg width="40" height="40" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="4"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="4"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="4"/></svg>
+    <span>naberol.</span>
+  </div>
+  <p class="loading-sub">Cargando tu sistema contable...</p>
+</div>
+
+<!-- APP -->
+<div id="app" style="display:none">
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="nav-brand">
+      <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      <span class="brand-name">naberol.</span>
+    </div>
+    <div class="nav-links">
+      <button class="nav-btn active" onclick="showTab('dashboard',this)"><i class="ti ti-chart-bar"></i> Dashboard</button>
+      <button class="nav-btn" onclick="showTab('clientes',this)"><i class="ti ti-users"></i> Clientes</button>
+      <button class="nav-btn" onclick="showTab('timbrados',this)"><i class="ti ti-stamp"></i> Timbrados</button>
+      <button class="nav-btn" onclick="showTab('facturas',this)"><i class="ti ti-file-invoice"></i> Facturas</button>
+    </div>
+    <div class="nav-tagline">Claridad fiscal, con diseño.</div>
+  </nav>
+
+  <!-- CONTENT -->
+  <main class="main-content">
+
+    <!-- DASHBOARD -->
+    <div id="tab-dashboard" class="section active">
+      <div class="page-header">
+        <h1 class="page-title">Dashboard</h1>
+        <span class="page-sub">Resumen general</span>
+      </div>
+      <div class="metric-grid" id="metrics"></div>
+      <div class="two-col">
+        <div class="card">
+          <p class="card-title">Ventas por IVA</p>
+          <div id="ventas-iva"></div>
+        </div>
+        <div class="card">
+          <p class="card-title">Compras por IVA</p>
+          <div id="compras-iva"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- CLIENTES -->
+    <div id="tab-clientes" class="section">
+      <!-- Lista -->
+      <div id="vista-lista-clientes">
+        <div class="page-header">
+          <div>
+            <h1 class="page-title">Clientes</h1>
+            <span class="page-sub">Seleccioná un cliente para ver y cargar sus facturas</span>
+          </div>
+          <button class="btn btn-primary" onclick="mostrarFormCliente()"><i class="ti ti-plus"></i> Nuevo cliente</button>
+        </div>
+        <div class="card" id="form-cliente" style="display:none;margin-bottom:1rem">
+          <div class="form-row">
+            <div class="form-group" style="max-width:220px">
+              <label>RUC / CI</label>
+              <div class="ruc-wrap">
+                <input type="text" id="c-ruc-base" placeholder="4889914">
+                <div class="ruc-sep">-</div>
+                <input type="text" id="c-ruc-dv" placeholder="3" maxlength="1">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Nombre / Razón social</label>
+              <input type="text" id="c-nombre" placeholder="Nahuel Bareiro">
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" onclick="agregarCliente()"><i class="ti ti-check"></i> Guardar</button>
+              <button class="btn btn-ghost" onclick="ocultarFormCliente()"><i class="ti ti-x"></i></button>
+            </div>
+          </div>
+        </div>
+        <div id="clientes-grid" class="clientes-grid"></div>
+      </div>
+
+      <!-- Perfil cliente -->
+      <div id="vista-perfil-cliente" style="display:none">
+        <button class="btn btn-ghost" style="margin-bottom:1.25rem" onclick="volverLista()"><i class="ti ti-arrow-left"></i> Volver</button>
+        <div class="perfil-header">
+          <div class="perfil-avatar" id="perfil-avatar"></div>
+          <div class="perfil-info">
+            <div class="perfil-nombre" id="perfil-nombre"></div>
+            <div class="perfil-ruc" id="perfil-ruc"></div>
+          </div>
+          <div class="perfil-stats">
+            <div class="stat-pill stat-green"><i class="ti ti-arrow-up-right"></i> <span id="perfil-total-ventas">Gs. 0</span></div>
+            <div class="stat-pill stat-red"><i class="ti ti-arrow-down-left"></i> <span id="perfil-total-compras">Gs. 0</span></div>
+          </div>
+        </div>
+        <div class="perfil-tabs">
+          <button class="perfil-tab active" onclick="perfilTab('historial',this)"><i class="ti ti-list"></i> Historial</button>
+          <button class="perfil-tab" onclick="perfilTab('nueva',this)"><i class="ti ti-plus"></i> Nueva factura</button>
+        </div>
+        <div id="perfil-historial"></div>
+        <div id="perfil-nueva" style="display:none">
+          <div class="card">
+            <div class="form-row" style="margin-bottom:.75rem">
+              <div class="form-group">
+                <label>Tipo</label>
+                <select id="pf-tipo"><option value="venta">Venta (emitida)</option><option value="compra">Compra (recibida)</option></select>
+              </div>
+              <div class="form-group">
+                <label class="label-row">Timbrado <button class="btn-link" onclick="toggleTimbradoPerfil()">+ Agregar nuevo</button></label>
+                <select id="pf-timbrado"><option value="">— Sin timbrado —</option></select>
+              </div>
+              <div class="form-group">
+                <label>N° Factura</label>
+                <input type="text" id="pf-nro" placeholder="001001684" oninput="onNroInputPerfil(this)" onblur="onNroBlurPerfil(this)" maxlength="17" autocomplete="off">
+                <div class="nro-preview" id="pf-nro-preview"></div>
+              </div>
+              <div class="form-group">
+                <label>Fecha</label>
+                <input type="date" id="pf-fecha">
+              </div>
+            </div>
+            <div class="timbrado-inline" id="pf-timbrado-inline">
+              <p class="inline-title">Nuevo timbrado</p>
+              <div class="form-row">
+                <div class="form-group"><label>Número</label><input type="text" id="pnt-nro" placeholder="12345678" maxlength="8"></div>
+                <div class="form-group"><label>Inicio</label><input type="date" id="pnt-inicio"></div>
+                <div class="form-group"><label>Fin</label><input type="date" id="pnt-fin"></div>
+                <div class="form-actions"><button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i> Guardar</button><button class="btn btn-ghost btn-sm" onclick="toggleTimbradoPerfil()"><i class="ti ti-x"></i></button></div>
+              </div>
+            </div>
+            <div class="total-row">
+              <label>Total factura</label>
+              <input type="number" id="pf-total" placeholder="0" oninput="recalcularPerfil()">
+            </div>
+            <table class="montos-table">
+              <thead><tr><th></th><th>Monto c/IVA</th><th>Gravada s/IVA</th><th>IVA</th></tr></thead>
+              <tbody>
+                <tr><td class="monto-label">Exenta</td><td><input type="number" id="pf-exenta" placeholder="0" oninput="recalcularPerfil()"></td><td><span class="calc-val" id="pr-exenta-grav">—</span></td><td><span class="calc-val" id="pr-exenta-iva">—</span></td></tr>
+                <tr><td class="monto-label">IVA 10% <button class="reset-auto" id="pf-btn-reset" style="display:none" onclick="resetAutoPerfil()">↺ auto</button></td><td><input type="number" id="pf-g10" placeholder="automático" oninput="onPfG10Input()"></td><td><span class="calc-val" id="pr-g10-grav">—</span></td><td><span class="calc-val" id="pr-g10-iva">—</span></td></tr>
+                <tr><td class="monto-label">IVA 5%</td><td><input type="number" id="pf-g5" placeholder="0" oninput="recalcularPerfil()"></td><td><span class="calc-val" id="pr-g5-grav">—</span></td><td><span class="calc-val" id="pr-g5-iva">—</span></td></tr>
+              </tbody>
+            </table>
+            <div class="falta-box" id="pf-falta-box"></div>
+            <div class="resumen-box">
+              <div class="resumen-item"><p class="resumen-label">Total IVA</p><p id="pr-iva-total" class="resumen-val">Gs. 0</p></div>
+              <div class="resumen-item"><p class="resumen-label">Total distribuido</p><p id="pr-distribuido" class="resumen-val">Gs. 0</p></div>
+              <div class="resumen-item"><p class="resumen-label">Total factura</p><p id="pr-total-final" class="resumen-val resumen-big">Gs. 0</p></div>
+            </div>
+            <button class="btn btn-primary" onclick="guardarFacturaPerfil()"><i class="ti ti-device-floppy"></i> Guardar factura</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMBRADOS -->
+    <div id="tab-timbrados" class="section">
+      <div class="page-header">
+        <h1 class="page-title">Timbrados</h1>
+        <span class="page-sub">Los vencidos no aparecen al cargar facturas</span>
+      </div>
+      <div class="card" style="margin-bottom:1rem">
+        <div class="form-row">
+          <div class="form-group"><label>Número de timbrado</label><input type="text" id="t-nro" placeholder="12345678" maxlength="8"></div>
+          <div class="form-group"><label>Inicio de vigencia</label><input type="date" id="t-inicio"></div>
+          <div class="form-group"><label>Fin de vigencia</label><input type="date" id="t-fin"></div>
+          <div class="form-actions"><button class="btn btn-primary" onclick="agregarTimbrado()"><i class="ti ti-plus"></i> Guardar</button></div>
+        </div>
+      </div>
+      <div id="lista-timbrados"><p class="empty-state">No hay timbrados aún.</p></div>
+    </div>
+
+    <!-- TODAS LAS FACTURAS -->
+    <div id="tab-facturas" class="section">
+      <div class="page-header">
+        <h1 class="page-title">Todas las facturas</h1>
+      </div>
+      <div class="filter-bar">
+        <select id="f-filtro-tipo" onchange="renderFacturas()">
+          <option value="">Todos los tipos</option>
+          <option value="venta">Ventas</option>
+          <option value="compra">Compras</option>
+        </select>
+        <select id="f-filtro-cliente" onchange="renderFacturas()"><option value="">Todos los clientes</option></select>
+        <input type="month" id="f-filtro-mes" onchange="renderFacturas()">
+      </div>
+      <div id="lista-facturas"><p class="empty-state">No hay facturas aún.</p></div>
+      <div id="resumen-filtrado"></div>
+    </div>
+
+  </main>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
