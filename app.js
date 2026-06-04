@@ -45,6 +45,7 @@ async function init() {
   try {
     const { data: { user } } = await db.auth.getUser()
     if (!user) { showLoginScreen(); return }
+    document.getElementById('login-screen').classList.remove('visible')
     document.getElementById('nav-user-email').textContent = user.email
     await cargarDatos()
     document.getElementById('loading').style.display = 'none'
@@ -58,7 +59,7 @@ async function init() {
 
 function showLoginScreen() {
   document.getElementById('loading').style.display = 'none'
-  document.getElementById('login-screen').style.display = 'block'
+  document.getElementById('login-screen').classList.add('visible')
 }
 
 async function login() {
@@ -77,7 +78,7 @@ async function login() {
     btn.disabled = false
     return
   }
-  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('login-screen').classList.remove('visible')
   document.getElementById('loading').style.display = 'flex'
   await init()
 }
