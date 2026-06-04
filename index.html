@@ -19,7 +19,33 @@
     <svg width="40" height="40" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="4"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="4"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="4"/></svg>
     <span>naberol.</span>
   </div>
-  <p class="loading-sub">Cargando tu sistema contable...</p>
+  <p class="loading-sub">Cargando...</p>
+</div>
+
+<!-- LOGIN -->
+<div id="login-screen" style="display:none">
+  <div class="login-wrap">
+    <div class="login-card">
+      <div class="login-logo">
+        <svg width="36" height="36" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+        <span>naberol.</span>
+      </div>
+      <h2 class="login-title">Iniciá sesión</h2>
+      <p class="login-sub">Sistema contable · Asunción, Paraguay</p>
+      <div class="form-group" style="margin-bottom:.75rem">
+        <label>Email</label>
+        <input type="email" id="login-email" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <div class="form-group" style="margin-bottom:1rem">
+        <label>Contraseña</label>
+        <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
+      </div>
+      <div id="login-error" class="login-error" style="display:none"></div>
+      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px" onclick="login()" id="login-btn">
+        <i class="ti ti-login"></i> Ingresar
+      </button>
+    </div>
+  </div>
 </div>
 
 <!-- APP -->
@@ -36,8 +62,12 @@
       <button class="nav-btn" onclick="showTab('clientes',this)"><i class="ti ti-users"></i> Clientes</button>
       <button class="nav-btn" onclick="showTab('timbrados',this)"><i class="ti ti-stamp"></i> Timbrados</button>
       <button class="nav-btn" onclick="showTab('facturas',this)"><i class="ti ti-file-invoice"></i> Facturas</button>
+      <button class="nav-btn" onclick="showTab('usuarios',this)"><i class="ti ti-user-cog"></i> Usuarios</button>
     </div>
-    <div class="nav-tagline">Claridad fiscal, con diseño.</div>
+    <div class="nav-right">
+      <span class="nav-user" id="nav-user-email"></span>
+      <button class="btn btn-ghost btn-sm" onclick="logout()"><i class="ti ti-logout"></i> Salir</button>
+    </div>
   </nav>
 
   <!-- CONTENT -->
@@ -46,31 +76,20 @@
     <!-- DASHBOARD -->
     <div id="tab-dashboard" class="section active">
       <div class="page-header">
-        <h1 class="page-title">Dashboard</h1>
-        <span class="page-sub">Resumen general</span>
+        <div><h1 class="page-title">Dashboard</h1><span class="page-sub">Resumen general</span></div>
       </div>
       <div class="metric-grid" id="metrics"></div>
       <div class="two-col">
-        <div class="card">
-          <p class="card-title">Ventas por IVA</p>
-          <div id="ventas-iva"></div>
-        </div>
-        <div class="card">
-          <p class="card-title">Compras por IVA</p>
-          <div id="compras-iva"></div>
-        </div>
+        <div class="card"><p class="card-title">Ventas por IVA</p><div id="ventas-iva"></div></div>
+        <div class="card"><p class="card-title">Compras por IVA</p><div id="compras-iva"></div></div>
       </div>
     </div>
 
     <!-- CLIENTES -->
     <div id="tab-clientes" class="section">
-      <!-- Lista -->
       <div id="vista-lista-clientes">
         <div class="page-header">
-          <div>
-            <h1 class="page-title">Clientes</h1>
-            <span class="page-sub">Seleccioná un cliente para ver y cargar sus facturas</span>
-          </div>
+          <div><h1 class="page-title">Clientes</h1><span class="page-sub">Seleccioná un cliente para ver y cargar sus facturas</span></div>
           <button class="btn btn-primary" onclick="mostrarFormCliente()"><i class="ti ti-plus"></i> Nuevo cliente</button>
         </div>
         <div class="card" id="form-cliente" style="display:none;margin-bottom:1rem">
@@ -83,10 +102,7 @@
                 <input type="text" id="c-ruc-dv" placeholder="3" maxlength="1">
               </div>
             </div>
-            <div class="form-group">
-              <label>Nombre / Razón social</label>
-              <input type="text" id="c-nombre" placeholder="Nahuel Bareiro">
-            </div>
+            <div class="form-group"><label>Nombre / Razón social</label><input type="text" id="c-nombre" placeholder="Nahuel Bareiro"></div>
             <div class="form-actions">
               <button class="btn btn-primary" onclick="agregarCliente()"><i class="ti ti-check"></i> Guardar</button>
               <button class="btn btn-ghost" onclick="ocultarFormCliente()"><i class="ti ti-x"></i></button>
@@ -96,7 +112,6 @@
         <div id="clientes-grid" class="clientes-grid"></div>
       </div>
 
-      <!-- Perfil cliente -->
       <div id="vista-perfil-cliente" style="display:none">
         <button class="btn btn-ghost" style="margin-bottom:1.25rem" onclick="volverLista()"><i class="ti ti-arrow-left"></i> Volver</button>
         <div class="perfil-header">
@@ -114,14 +129,25 @@
           <button class="perfil-tab active" onclick="perfilTab('historial',this)"><i class="ti ti-list"></i> Historial</button>
           <button class="perfil-tab" onclick="perfilTab('nueva',this)"><i class="ti ti-plus"></i> Nueva factura</button>
         </div>
-        <div id="perfil-historial"></div>
+
+        <!-- HISTORIAL con tabs y filtro -->
+        <div id="perfil-historial">
+          <div class="historial-controls">
+            <div class="tipo-tabs">
+              <button class="tipo-tab active" onclick="setHistorialFilter('todos',this)">Todos</button>
+              <button class="tipo-tab" onclick="setHistorialFilter('venta',this)"><i class="ti ti-arrow-up-right"></i> Ventas</button>
+              <button class="tipo-tab" onclick="setHistorialFilter('compra',this)"><i class="ti ti-arrow-down-left"></i> Compras</button>
+            </div>
+            <input type="month" id="historial-mes" onchange="renderPerfilHistorial()" placeholder="Filtrar por mes">
+          </div>
+          <div id="perfil-facturas-lista"></div>
+        </div>
+
+        <!-- NUEVA FACTURA -->
         <div id="perfil-nueva" style="display:none">
           <div class="card">
             <div class="form-row" style="margin-bottom:.75rem">
-              <div class="form-group">
-                <label>Tipo</label>
-                <select id="pf-tipo"><option value="venta">Venta (emitida)</option><option value="compra">Compra (recibida)</option></select>
-              </div>
+              <div class="form-group"><label>Tipo</label><select id="pf-tipo"><option value="venta">Venta (emitida)</option><option value="compra">Compra (recibida)</option></select></div>
               <div class="form-group">
                 <label class="label-row">Timbrado <button class="btn-link" onclick="toggleTimbradoPerfil()">+ Agregar nuevo</button></label>
                 <select id="pf-timbrado"><option value="">— Sin timbrado —</option></select>
@@ -131,10 +157,7 @@
                 <input type="text" id="pf-nro" placeholder="001001684" oninput="onNroInputPerfil(this)" onblur="onNroBlurPerfil(this)" maxlength="17" autocomplete="off">
                 <div class="nro-preview" id="pf-nro-preview"></div>
               </div>
-              <div class="form-group">
-                <label>Fecha</label>
-                <input type="date" id="pf-fecha">
-              </div>
+              <div class="form-group"><label>Fecha</label><input type="date" id="pf-fecha"></div>
             </div>
             <div class="timbrado-inline" id="pf-timbrado-inline">
               <p class="inline-title">Nuevo timbrado</p>
@@ -142,13 +165,13 @@
                 <div class="form-group"><label>Número</label><input type="text" id="pnt-nro" placeholder="12345678" maxlength="8"></div>
                 <div class="form-group"><label>Inicio</label><input type="date" id="pnt-inicio"></div>
                 <div class="form-group"><label>Fin</label><input type="date" id="pnt-fin"></div>
-                <div class="form-actions"><button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i> Guardar</button><button class="btn btn-ghost btn-sm" onclick="toggleTimbradoPerfil()"><i class="ti ti-x"></i></button></div>
+                <div class="form-actions">
+                  <button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i> Guardar</button>
+                  <button class="btn btn-ghost btn-sm" onclick="toggleTimbradoPerfil()"><i class="ti ti-x"></i></button>
+                </div>
               </div>
             </div>
-            <div class="total-row">
-              <label>Total factura</label>
-              <input type="number" id="pf-total" placeholder="0" oninput="recalcularPerfil()">
-            </div>
+            <div class="total-row"><label>Total factura</label><input type="number" id="pf-total" placeholder="0" oninput="recalcularPerfil()"></div>
             <table class="montos-table">
               <thead><tr><th></th><th>Monto c/IVA</th><th>Gravada s/IVA</th><th>IVA</th></tr></thead>
               <tbody>
@@ -171,13 +194,10 @@
 
     <!-- TIMBRADOS -->
     <div id="tab-timbrados" class="section">
-      <div class="page-header">
-        <h1 class="page-title">Timbrados</h1>
-        <span class="page-sub">Los vencidos no aparecen al cargar facturas</span>
-      </div>
+      <div class="page-header"><h1 class="page-title">Timbrados</h1><span class="page-sub">Los vencidos no aparecen al cargar facturas</span></div>
       <div class="card" style="margin-bottom:1rem">
         <div class="form-row">
-          <div class="form-group"><label>Número de timbrado</label><input type="text" id="t-nro" placeholder="12345678" maxlength="8"></div>
+          <div class="form-group"><label>Número</label><input type="text" id="t-nro" placeholder="12345678" maxlength="8"></div>
           <div class="form-group"><label>Inicio de vigencia</label><input type="date" id="t-inicio"></div>
           <div class="form-group"><label>Fin de vigencia</label><input type="date" id="t-fin"></div>
           <div class="form-actions"><button class="btn btn-primary" onclick="agregarTimbrado()"><i class="ti ti-plus"></i> Guardar</button></div>
@@ -188,20 +208,35 @@
 
     <!-- TODAS LAS FACTURAS -->
     <div id="tab-facturas" class="section">
-      <div class="page-header">
-        <h1 class="page-title">Todas las facturas</h1>
-      </div>
+      <div class="page-header"><h1 class="page-title">Todas las facturas</h1></div>
       <div class="filter-bar">
-        <select id="f-filtro-tipo" onchange="renderFacturas()">
-          <option value="">Todos los tipos</option>
-          <option value="venta">Ventas</option>
-          <option value="compra">Compras</option>
-        </select>
+        <select id="f-filtro-tipo" onchange="renderFacturas()"><option value="">Todos los tipos</option><option value="venta">Ventas</option><option value="compra">Compras</option></select>
         <select id="f-filtro-cliente" onchange="renderFacturas()"><option value="">Todos los clientes</option></select>
         <input type="month" id="f-filtro-mes" onchange="renderFacturas()">
       </div>
       <div id="lista-facturas"><p class="empty-state">No hay facturas aún.</p></div>
       <div id="resumen-filtrado"></div>
+    </div>
+
+    <!-- USUARIOS -->
+    <div id="tab-usuarios" class="section">
+      <div class="page-header">
+        <div><h1 class="page-title">Usuarios</h1><span class="page-sub">Gestioná quién puede acceder al sistema</span></div>
+      </div>
+      <div class="card" style="margin-bottom:1.5rem">
+        <p class="card-title">Crear nuevo usuario</p>
+        <div class="form-row">
+          <div class="form-group"><label>Email</label><input type="email" id="u-email" placeholder="nuevo@email.com"></div>
+          <div class="form-group"><label>Contraseña</label><input type="password" id="u-password" placeholder="Mínimo 6 caracteres"></div>
+          <div class="form-actions"><button class="btn btn-primary" onclick="crearUsuario()"><i class="ti ti-user-plus"></i> Crear usuario</button></div>
+        </div>
+        <div id="u-msg" style="margin-top:.75rem;font-size:13px;display:none"></div>
+        <div class="info-box" style="margin-top:1rem">
+          <i class="ti ti-info-circle"></i>
+          El usuario nuevo podrá iniciar sesión de inmediato con el email y contraseña que le asignaste.
+        </div>
+      </div>
+      <div id="lista-usuarios"><p class="empty-state">Cargando usuarios...</p></div>
     </div>
 
   </main>
