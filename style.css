@@ -596,3 +596,132 @@ select option { background: #0d2a5e; }
   animation: spin .6s linear infinite;
 }
 @keyframes spin { to { transform: rotate(360deg); } }
+
+/* ── LOGIN ────────────────────────────────── */
+.login-wrap {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem;
+  background: radial-gradient(ellipse at top, #0A2554 0%, #061A3A 60%);
+}
+.login-card {
+  width: 100%;
+  max-width: 380px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  animation: fadeIn .4s var(--ease-out);
+}
+.login-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 1.75rem;
+}
+.login-title { font-size: 20px; font-weight: 700; margin-bottom: 4px; }
+.login-sub { font-size: 12px; color: var(--text-subtle); margin-bottom: 1.5rem; font-family: var(--font-mono); }
+.login-error {
+  background: var(--danger-bg);
+  border: 1px solid var(--danger-border);
+  color: var(--danger-text);
+  border-radius: var(--radius-sm);
+  padding: 8px 12px;
+  font-size: 13px;
+  margin-bottom: .75rem;
+}
+
+/* ── NAV RIGHT ────────────────────────────────── */
+.nav-right {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+.nav-user {
+  font-size: 12px;
+  color: var(--text-subtle);
+  font-family: var(--font-mono);
+  max-width: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* ── HISTORIAL CONTROLS ────────────────────────────────── */
+.historial-controls {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+.tipo-tabs {
+  display: flex;
+  gap: 3px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-sm);
+  padding: 3px;
+}
+.tipo-tab {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border: none;
+  background: none;
+  color: var(--text-soft);
+  font-family: var(--font-sans);
+  font-size: 12px;
+  font-weight: 500;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.tipo-tab.active { background: var(--blue); color: white; }
+.tipo-tab:hover:not(.active) { color: var(--text-primary); background: var(--card-hover); }
+.historial-controls input[type="month"] {
+  width: auto;
+  flex: 0 0 auto;
+  font-size: 13px;
+  padding: 6px 10px;
+}
+
+/* ── INFO BOX ────────────────────────────────── */
+.info-box {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  background: rgba(30,122,245,0.1);
+  border: 1px solid rgba(30,122,245,0.2);
+  border-radius: var(--radius-sm);
+  padding: 10px 12px;
+  font-size: 12px;
+  color: var(--blue-light);
+}
+.info-box i { flex-shrink: 0; margin-top: 1px; }
+
+/* ── USUARIOS ────────────────────────────────── */
+.usuario-row {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: .75rem 1rem;
+  border-bottom: 1px solid rgba(255,255,255,0.05);
+}
+.usuario-row:last-child { border-bottom: none; }
+.usuario-avatar-sm {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #0A4BA6, #1E7AF5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: white; flex-shrink: 0;
+}
+.usuario-email { font-size: 13px; color: var(--text-medium); }
+.usuario-created { font-size: 11px; color: var(--text-subtle); font-family: var(--font-mono); }
