@@ -23,7 +23,7 @@
 </div>
 
 <!-- LOGIN -->
-<div id="login-screen" style="display:none">
+<div id="login-screen">
   <div class="login-bg">
     <div class="login-orb login-orb-1"></div>
     <div class="login-orb login-orb-2"></div>
@@ -39,13 +39,8 @@
               <stop offset="0%" stop-color="#4F99FF"/>
               <stop offset="100%" stop-color="#1E7AF5"/>
             </linearGradient>
-            <linearGradient id="ng2" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#1E7AF5"/>
-              <stop offset="100%" stop-color="#0A4BA6"/>
-            </linearGradient>
           </defs>
           <path d="M16,14 Q12,14 12,18 L12,102 Q12,106 16,106 L30,106 Q34,106 34,102 L34,46 L82,104 Q84,106 88,106 L104,106 Q108,106 108,102 L108,18 Q108,14 104,14 L90,14 Q86,14 86,18 L86,74 L38,16 Q36,14 32,14 Z" fill="url(#ng1)"/>
-          <path d="M20,18 L20,102 L34,102 L34,46 L82,104 L86,104 L86,74 L38,16 Z" fill="url(#ng2)" opacity="0.25"/>
         </svg>
       </div>
       <div class="login-wordmark">naberol.</div>
@@ -75,7 +70,7 @@
         <label>Contraseña</label>
         <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
       </div>
-      <div id="login-error" class="login-error" style="display:none"></div>
+      <div id="login-error" class="login-error"></div>
       <button class="btn-login" onclick="login()" id="login-btn">
         <i class="ti ti-login"></i> Ingresar al sistema
       </button>
@@ -84,13 +79,79 @@
   </div>
 </div>
 
-<!-- APP -->
-<div id="app" style="display:none">
+<!-- HOME (pantalla principal tras login) -->
+<div id="home-screen">
+  <div class="home-bg">
+    <div class="home-orb home-orb-1"></div>
+    <div class="home-orb home-orb-2"></div>
+  </div>
+  <div class="home-topbar">
+    <div class="home-brand">
+      <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      <span>naberol.</span>
+    </div>
+    <div class="home-topbar-right">
+      <span class="home-user-email" id="home-user-email"></span>
+      <button class="btn-logout" onclick="logout()"><i class="ti ti-logout"></i> Salir</button>
+    </div>
+  </div>
+  <div class="home-content">
+    <div class="home-greeting">
+      <h1 id="home-greeting-text">Bienvenido.</h1>
+      <p>¿Qué querés gestionar hoy?</p>
+    </div>
+    <div class="home-stats-row" id="home-quick-stats"></div>
+    <div class="home-cards">
+      <div class="home-card" onclick="enterSection('dashboard')">
+        <div class="home-card-icon hc-blue"><i class="ti ti-chart-bar"></i></div>
+        <div class="home-card-body">
+          <div class="home-card-title">Dashboard</div>
+          <div class="home-card-desc">Resumen de ventas, compras e IVA</div>
+        </div>
+        <i class="ti ti-arrow-right home-card-arrow"></i>
+      </div>
+      <div class="home-card" onclick="enterSection('clientes')">
+        <div class="home-card-icon hc-green"><i class="ti ti-users"></i></div>
+        <div class="home-card-body">
+          <div class="home-card-title">Clientes</div>
+          <div class="home-card-desc">Gestioná clientes y sus facturas</div>
+        </div>
+        <i class="ti ti-arrow-right home-card-arrow"></i>
+      </div>
+      <div class="home-card" onclick="enterSection('timbrados')">
+        <div class="home-card-icon hc-amber"><i class="ti ti-stamp"></i></div>
+        <div class="home-card-body">
+          <div class="home-card-title">Timbrados</div>
+          <div class="home-card-desc">Timbrados vigentes y vencidos</div>
+        </div>
+        <i class="ti ti-arrow-right home-card-arrow"></i>
+      </div>
+      <div class="home-card" onclick="enterSection('facturas')">
+        <div class="home-card-icon hc-purple"><i class="ti ti-file-invoice"></i></div>
+        <div class="home-card-body">
+          <div class="home-card-title">Facturas</div>
+          <div class="home-card-desc">Todas las facturas de compra y venta</div>
+        </div>
+        <i class="ti ti-arrow-right home-card-arrow"></i>
+      </div>
+      <div class="home-card" onclick="enterSection('usuarios')">
+        <div class="home-card-icon hc-teal"><i class="ti ti-user-cog"></i></div>
+        <div class="home-card-body">
+          <div class="home-card-title">Usuarios</div>
+          <div class="home-card-desc">Gestioná quién accede al sistema</div>
+        </div>
+        <i class="ti ti-arrow-right home-card-arrow"></i>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <!-- NAVBAR -->
+<!-- APP (secciones individuales) -->
+<div id="app">
   <nav class="navbar">
+    <button class="nav-back" onclick="goHome()"><i class="ti ti-arrow-left"></i></button>
     <div class="nav-brand">
-      <svg width="28" height="28" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      <svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
       <span class="brand-name">naberol.</span>
     </div>
     <div class="nav-links">
@@ -106,14 +167,10 @@
     </div>
   </nav>
 
-  <!-- CONTENT -->
   <main class="main-content">
 
-    <!-- DASHBOARD -->
     <div id="tab-dashboard" class="section active">
-      <div class="page-header">
-        <div><h1 class="page-title">Dashboard</h1><span class="page-sub">Resumen general</span></div>
-      </div>
+      <div class="page-header"><div><h1 class="page-title">Dashboard</h1><span class="page-sub">Resumen general</span></div></div>
       <div class="metric-grid" id="metrics"></div>
       <div class="two-col">
         <div class="card"><p class="card-title">Ventas por IVA</p><div id="ventas-iva"></div></div>
@@ -121,7 +178,6 @@
       </div>
     </div>
 
-    <!-- CLIENTES -->
     <div id="tab-clientes" class="section">
       <div id="vista-lista-clientes">
         <div class="page-header">
@@ -147,15 +203,11 @@
         </div>
         <div id="clientes-grid" class="clientes-grid"></div>
       </div>
-
       <div id="vista-perfil-cliente" style="display:none">
         <button class="btn btn-ghost" style="margin-bottom:1.25rem" onclick="volverLista()"><i class="ti ti-arrow-left"></i> Volver</button>
         <div class="perfil-header">
           <div class="perfil-avatar" id="perfil-avatar"></div>
-          <div class="perfil-info">
-            <div class="perfil-nombre" id="perfil-nombre"></div>
-            <div class="perfil-ruc" id="perfil-ruc"></div>
-          </div>
+          <div class="perfil-info"><div class="perfil-nombre" id="perfil-nombre"></div><div class="perfil-ruc" id="perfil-ruc"></div></div>
           <div class="perfil-stats">
             <div class="stat-pill stat-green"><i class="ti ti-arrow-up-right"></i> <span id="perfil-total-ventas">Gs. 0</span></div>
             <div class="stat-pill stat-red"><i class="ti ti-arrow-down-left"></i> <span id="perfil-total-compras">Gs. 0</span></div>
@@ -165,8 +217,6 @@
           <button class="perfil-tab active" onclick="perfilTab('historial',this)"><i class="ti ti-list"></i> Historial</button>
           <button class="perfil-tab" onclick="perfilTab('nueva',this)"><i class="ti ti-plus"></i> Nueva factura</button>
         </div>
-
-        <!-- HISTORIAL con tabs y filtro -->
         <div id="perfil-historial">
           <div class="historial-controls">
             <div class="tipo-tabs">
@@ -174,12 +224,10 @@
               <button class="tipo-tab" onclick="setHistorialFilter('venta',this)"><i class="ti ti-arrow-up-right"></i> Ventas</button>
               <button class="tipo-tab" onclick="setHistorialFilter('compra',this)"><i class="ti ti-arrow-down-left"></i> Compras</button>
             </div>
-            <input type="month" id="historial-mes" onchange="renderPerfilHistorial()" placeholder="Filtrar por mes">
+            <input type="month" id="historial-mes" onchange="renderPerfilHistorial()">
           </div>
           <div id="perfil-facturas-lista"></div>
         </div>
-
-        <!-- NUEVA FACTURA -->
         <div id="perfil-nueva" style="display:none">
           <div class="card">
             <div class="form-row" style="margin-bottom:.75rem">
@@ -202,7 +250,7 @@
                 <div class="form-group"><label>Inicio</label><input type="date" id="pnt-inicio"></div>
                 <div class="form-group"><label>Fin</label><input type="date" id="pnt-fin"></div>
                 <div class="form-actions">
-                  <button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i> Guardar</button>
+                  <button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i></button>
                   <button class="btn btn-ghost btn-sm" onclick="toggleTimbradoPerfil()"><i class="ti ti-x"></i></button>
                 </div>
               </div>
@@ -228,7 +276,6 @@
       </div>
     </div>
 
-    <!-- TIMBRADOS -->
     <div id="tab-timbrados" class="section">
       <div class="page-header"><h1 class="page-title">Timbrados</h1><span class="page-sub">Los vencidos no aparecen al cargar facturas</span></div>
       <div class="card" style="margin-bottom:1rem">
@@ -242,7 +289,6 @@
       <div id="lista-timbrados"><p class="empty-state">No hay timbrados aún.</p></div>
     </div>
 
-    <!-- TODAS LAS FACTURAS -->
     <div id="tab-facturas" class="section">
       <div class="page-header"><h1 class="page-title">Todas las facturas</h1></div>
       <div class="filter-bar">
@@ -254,25 +300,19 @@
       <div id="resumen-filtrado"></div>
     </div>
 
-    <!-- USUARIOS -->
     <div id="tab-usuarios" class="section">
-      <div class="page-header">
-        <div><h1 class="page-title">Usuarios</h1><span class="page-sub">Gestioná quién puede acceder al sistema</span></div>
-      </div>
+      <div class="page-header"><div><h1 class="page-title">Usuarios</h1><span class="page-sub">Gestioná quién puede acceder al sistema</span></div></div>
       <div class="card" style="margin-bottom:1.5rem">
         <p class="card-title">Crear nuevo usuario</p>
         <div class="form-row">
           <div class="form-group"><label>Email</label><input type="email" id="u-email" placeholder="nuevo@email.com"></div>
           <div class="form-group"><label>Contraseña</label><input type="password" id="u-password" placeholder="Mínimo 6 caracteres"></div>
-          <div class="form-actions"><button class="btn btn-primary" onclick="crearUsuario()"><i class="ti ti-user-plus"></i> Crear usuario</button></div>
+          <div class="form-actions"><button class="btn btn-primary" onclick="crearUsuario()"><i class="ti ti-user-plus"></i> Crear</button></div>
         </div>
         <div id="u-msg" style="margin-top:.75rem;font-size:13px;display:none"></div>
-        <div class="info-box" style="margin-top:1rem">
-          <i class="ti ti-info-circle"></i>
-          El usuario nuevo podrá iniciar sesión de inmediato con el email y contraseña que le asignaste.
-        </div>
+        <div class="info-box" style="margin-top:1rem"><i class="ti ti-info-circle"></i> El usuario nuevo podrá iniciar sesión de inmediato.</div>
       </div>
-      <div id="lista-usuarios"><p class="empty-state">Cargando usuarios...</p></div>
+      <div id="lista-usuarios"></div>
     </div>
 
   </main>
