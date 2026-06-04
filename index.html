@@ -4,9 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>naberol. — Contable</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
   <link rel="stylesheet" href="style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -14,305 +11,223 @@
 <body>
 
 <!-- LOADING -->
-<div id="loading">
-  <div class="loading-logo">
-    <svg width="40" height="40" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="4"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="4"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="4"/></svg>
-    <span>naberol.</span>
+<div id="s-loading">
+  <div class="ll">
+    <svg width="36" height="36" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A"/><path d="M8,6L8,26" stroke="#1E7AF5" stroke-width="4"/><path d="M8,6L24,26" stroke="#1E7AF5" stroke-width="4"/><path d="M24,6L24,26" stroke="#4F99FF" stroke-width="4"/></svg>
+    naberol.
   </div>
-  <p class="loading-sub">Cargando...</p>
+  <p class="ls">Cargando...</p>
 </div>
 
 <!-- LOGIN -->
-<div id="login-screen">
-  <div class="login-bg">
-    <div class="login-orb login-orb-1"></div>
-    <div class="login-orb login-orb-2"></div>
-    <div class="login-orb login-orb-3"></div>
-    <div class="login-grid"></div>
-  </div>
-  <div class="login-left">
-    <div class="login-left-inner">
-      <div class="login-brand-logo">
-        <svg viewBox="0 0 120 120" width="88" height="88" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="ng1" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#4F99FF"/>
-              <stop offset="100%" stop-color="#1E7AF5"/>
-            </linearGradient>
-          </defs>
-          <path d="M16,14 Q12,14 12,18 L12,102 Q12,106 16,106 L30,106 Q34,106 34,102 L34,46 L82,104 Q84,106 88,106 L104,106 Q108,106 108,102 L108,18 Q108,14 104,14 L90,14 Q86,14 86,18 L86,74 L38,16 Q36,14 32,14 Z" fill="url(#ng1)"/>
+<div id="s-login" class="screen">
+  <div class="lbg"></div>
+  <div class="lgrid"></div>
+  <div class="lorb lo1"></div>
+  <div class="lorb lo2"></div>
+  <div class="l-left">
+    <div class="l-left-in">
+      <div class="llogo">
+        <svg viewBox="0 0 120 120" width="84" height="84">
+          <defs><linearGradient id="ng" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#4F99FF"/><stop offset="100%" stop-color="#1E7AF5"/></linearGradient></defs>
+          <path d="M16,14Q12,14 12,18L12,102Q12,106 16,106L30,106Q34,106 34,102L34,46L82,104Q84,106 88,106L104,106Q108,106 108,102L108,18Q108,14 104,14L90,14Q86,14 86,18L86,74L38,16Q36,14 32,14Z" fill="url(#ng)"/>
         </svg>
       </div>
-      <div class="login-wordmark">naberol.</div>
-      <div class="login-tagline">Claridad fiscal, con diseño.</div>
-      <div class="login-features">
-        <div class="login-feat"><i class="ti ti-check"></i> Gestión de clientes y facturas</div>
-        <div class="login-feat"><i class="ti ti-check"></i> IVA 10%, 5% y exentas automático</div>
-        <div class="login-feat"><i class="ti ti-check"></i> Dashboard con resúmenes en tiempo real</div>
-        <div class="login-feat"><i class="ti ti-check"></i> Multi-usuario con acceso por contraseña</div>
+      <div class="lword">naberol.</div>
+      <div class="ltag">Claridad fiscal, con diseño.</div>
+      <div class="lfeats">
+        <div class="lfeat"><i class="ti ti-check"></i> Gestión de clientes y facturas</div>
+        <div class="lfeat"><i class="ti ti-check"></i> IVA 10%, 5% y exentas automático</div>
+        <div class="lfeat"><i class="ti ti-check"></i> Dashboard con resúmenes en tiempo real</div>
+        <div class="lfeat"><i class="ti ti-check"></i> Multi-usuario con acceso por contraseña</div>
       </div>
-      <div class="login-footer-text">Sistema contable · Asunción, Paraguay · 2026</div>
+      <div class="lfoot">Sistema contable · Asunción, Paraguay · 2026</div>
     </div>
   </div>
-  <div class="login-right">
-    <div class="login-card">
-      <div class="login-card-logo">
-        <svg viewBox="0 0 32 32" width="28" height="28"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
-        <span>naberol.</span>
+  <div class="l-right">
+    <div class="lcard">
+      <div class="lcbrand">
+        <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+        naberol.
       </div>
-      <p class="login-card-title">Iniciá sesión</p>
-      <p class="login-card-sub">Ingresá tus credenciales para acceder al sistema</p>
-      <div class="form-group" style="margin-bottom:.85rem">
-        <label>Email</label>
-        <input type="email" id="login-email" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')login()">
-      </div>
-      <div class="form-group" style="margin-bottom:1.25rem">
-        <label>Contraseña</label>
-        <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
-      </div>
-      <div id="login-error" class="login-error"></div>
-      <button class="btn-login" onclick="login()" id="login-btn">
-        <i class="ti ti-login"></i> Ingresar al sistema
-      </button>
-      <p class="login-powered">naberol. Contable © 2026</p>
+      <p class="lctitle">Iniciá sesión</p>
+      <p class="lcsub">Ingresá tus credenciales para acceder</p>
+      <div class="lcerr" id="login-err"></div>
+      <div style="margin-bottom:.85rem"><label>Email</label><input type="email" id="l-email" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <div style="margin-bottom:1.25rem"><label>Contraseña</label><input type="password" id="l-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter')doLogin()"></div>
+      <button class="lcbtn" id="l-btn" onclick="doLogin()"><i class="ti ti-login"></i> Ingresar al sistema</button>
+      <p class="lcfoot">naberol. Contable © 2026</p>
     </div>
   </div>
 </div>
 
-<!-- HOME (pantalla principal tras login) -->
-<div id="home-screen">
-  <div class="home-bg">
-    <div class="home-orb home-orb-1"></div>
-    <div class="home-orb home-orb-2"></div>
+<!-- HOME -->
+<div id="s-home" class="screen">
+  <div class="hbg"></div>
+  <div class="horb ho1"></div>
+  <div class="horb ho2"></div>
+  <div class="htop">
+    <div class="htbrand">
+      <svg viewBox="0 0 32 32" width="24" height="24"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      naberol.
+    </div>
+    <div class="htr">
+      <span class="htemail" id="h-email"></span>
+      <button class="btn-out" onclick="doLogout()"><i class="ti ti-logout"></i> Salir</button>
+    </div>
   </div>
-  <div class="home-topbar">
-    <div class="home-brand">
-      <svg viewBox="0 0 32 32" width="26" height="26"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
-      <span>naberol.</span>
-    </div>
-    <div class="home-topbar-right">
-      <span class="home-user-email" id="home-user-email"></span>
-      <button class="btn-logout" onclick="logout()"><i class="ti ti-logout"></i> Salir</button>
-    </div>
-  </div>
-  <div class="home-content">
-    <div class="home-greeting">
-      <h1 id="home-greeting-text">Bienvenido.</h1>
-      <p>¿Qué querés gestionar hoy?</p>
-    </div>
-    <div class="home-stats-row" id="home-quick-stats"></div>
-    <div class="home-cards">
-      <div class="home-card" onclick="enterSection('dashboard')">
-        <div class="home-card-icon hc-blue"><i class="ti ti-chart-bar"></i></div>
-        <div class="home-card-body">
-          <div class="home-card-title">Dashboard</div>
-          <div class="home-card-desc">Resumen de ventas, compras e IVA</div>
-        </div>
-        <i class="ti ti-arrow-right home-card-arrow"></i>
-      </div>
-      <div class="home-card" onclick="enterSection('clientes')">
-        <div class="home-card-icon hc-green"><i class="ti ti-users"></i></div>
-        <div class="home-card-body">
-          <div class="home-card-title">Clientes</div>
-          <div class="home-card-desc">Gestioná clientes y sus facturas</div>
-        </div>
-        <i class="ti ti-arrow-right home-card-arrow"></i>
-      </div>
-      <div class="home-card" onclick="enterSection('timbrados')">
-        <div class="home-card-icon hc-amber"><i class="ti ti-stamp"></i></div>
-        <div class="home-card-body">
-          <div class="home-card-title">Timbrados</div>
-          <div class="home-card-desc">Timbrados vigentes y vencidos</div>
-        </div>
-        <i class="ti ti-arrow-right home-card-arrow"></i>
-      </div>
-      <div class="home-card" onclick="enterSection('facturas')">
-        <div class="home-card-icon hc-purple"><i class="ti ti-file-invoice"></i></div>
-        <div class="home-card-body">
-          <div class="home-card-title">Facturas</div>
-          <div class="home-card-desc">Todas las facturas de compra y venta</div>
-        </div>
-        <i class="ti ti-arrow-right home-card-arrow"></i>
-      </div>
-      <div class="home-card" onclick="enterSection('usuarios')">
-        <div class="home-card-icon hc-teal"><i class="ti ti-user-cog"></i></div>
-        <div class="home-card-body">
-          <div class="home-card-title">Usuarios</div>
-          <div class="home-card-desc">Gestioná quién accede al sistema</div>
-        </div>
-        <i class="ti ti-arrow-right home-card-arrow"></i>
-      </div>
+  <div class="hbody">
+    <div class="hgreet"><h1 id="h-greet">Bienvenido.</h1><p>¿Qué querés gestionar hoy?</p></div>
+    <div class="hchips" id="h-chips"></div>
+    <div class="hnav">
+      <div class="hn" onclick="enterSection('dashboard')"><div class="hnico c1"><i class="ti ti-chart-bar"></i></div><div class="hnbody"><div class="hntitle">Dashboard</div><div class="hndesc">Resumen de ventas, compras e IVA</div></div><i class="ti ti-chevron-right hnarr"></i></div>
+      <div class="hn" onclick="enterSection('clientes')"><div class="hnico c2"><i class="ti ti-users"></i></div><div class="hnbody"><div class="hntitle">Clientes</div><div class="hndesc">Gestioná clientes y sus facturas</div></div><i class="ti ti-chevron-right hnarr"></i></div>
+      <div class="hn" onclick="enterSection('timbrados')"><div class="hnico c3"><i class="ti ti-stamp"></i></div><div class="hnbody"><div class="hntitle">Timbrados</div><div class="hndesc">Timbrados vigentes y vencidos</div></div><i class="ti ti-chevron-right hnarr"></i></div>
+      <div class="hn" onclick="enterSection('facturas')"><div class="hnico c4"><i class="ti ti-file-invoice"></i></div><div class="hnbody"><div class="hntitle">Facturas</div><div class="hndesc">Todas las facturas de compra y venta</div></div><i class="ti ti-chevron-right hnarr"></i></div>
+      <div class="hn" onclick="enterSection('usuarios')"><div class="hnico c5"><i class="ti ti-user-cog"></i></div><div class="hnbody"><div class="hntitle">Usuarios</div><div class="hndesc">Gestioná quién accede al sistema</div></div><i class="ti ti-chevron-right hnarr"></i></div>
     </div>
   </div>
 </div>
 
-<!-- APP (secciones individuales) -->
-<div id="app">
+<!-- APP -->
+<div id="s-app" class="screen">
   <nav class="navbar">
-    <button class="nav-back" onclick="goHome()"><i class="ti ti-arrow-left"></i></button>
-    <div class="nav-brand">
-      <svg width="24" height="24" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
-      <span class="brand-name">naberol.</span>
+    <button class="nb-back" onclick="goHome()"><i class="ti ti-arrow-left"></i></button>
+    <div class="nb-brand">
+      <svg viewBox="0 0 32 32" width="22" height="22"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      naberol.
     </div>
-    <div class="nav-links">
-      <button class="nav-btn active" onclick="showTab('dashboard',this)"><i class="ti ti-chart-bar"></i> Dashboard</button>
-      <button class="nav-btn" onclick="showTab('clientes',this)"><i class="ti ti-users"></i> Clientes</button>
-      <button class="nav-btn" onclick="showTab('timbrados',this)"><i class="ti ti-stamp"></i> Timbrados</button>
-      <button class="nav-btn" onclick="showTab('facturas',this)"><i class="ti ti-file-invoice"></i> Facturas</button>
-      <button class="nav-btn" onclick="showTab('usuarios',this)"><i class="ti ti-user-cog"></i> Usuarios</button>
+    <div class="nb-links">
+      <button class="nb-btn active" onclick="showTab('dashboard',this)"><i class="ti ti-chart-bar"></i> Dashboard</button>
+      <button class="nb-btn" onclick="showTab('clientes',this)"><i class="ti ti-users"></i> Clientes</button>
+      <button class="nb-btn" onclick="showTab('timbrados',this)"><i class="ti ti-stamp"></i> Timbrados</button>
+      <button class="nb-btn" onclick="showTab('facturas',this)"><i class="ti ti-file-invoice"></i> Facturas</button>
+      <button class="nb-btn" onclick="showTab('usuarios',this)"><i class="ti ti-user-cog"></i> Usuarios</button>
     </div>
-    <div class="nav-right">
-      <span class="nav-user" id="nav-user-email"></span>
-      <button class="btn btn-ghost btn-sm" onclick="logout()"><i class="ti ti-logout"></i> Salir</button>
+    <div class="nb-right">
+      <span class="nb-email" id="nb-email"></span>
+      <button class="btn-out" onclick="doLogout()"><i class="ti ti-logout"></i> Salir</button>
     </div>
   </nav>
-
-  <main class="main-content">
+  <main class="main">
 
     <div id="tab-dashboard" class="section active">
-      <div class="page-header"><div><h1 class="page-title">Dashboard</h1><span class="page-sub">Resumen general</span></div></div>
-      <div class="metric-grid" id="metrics"></div>
+      <div class="phdr"><div><h1 class="ptitle">Dashboard</h1><span class="psub">Resumen general</span></div></div>
+      <div class="mgrid" id="metrics"></div>
       <div class="two-col">
-        <div class="card"><p class="card-title">Ventas por IVA</p><div id="ventas-iva"></div></div>
-        <div class="card"><p class="card-title">Compras por IVA</p><div id="compras-iva"></div></div>
+        <div class="card"><p class="ctitle">Ventas por IVA</p><div id="iva-ventas"></div></div>
+        <div class="card"><p class="ctitle">Compras por IVA</p><div id="iva-compras"></div></div>
       </div>
     </div>
 
     <div id="tab-clientes" class="section">
-      <div id="vista-lista-clientes">
-        <div class="page-header">
-          <div><h1 class="page-title">Clientes</h1><span class="page-sub">Seleccioná un cliente para ver y cargar sus facturas</span></div>
-          <button class="btn btn-primary" onclick="mostrarFormCliente()"><i class="ti ti-plus"></i> Nuevo cliente</button>
-        </div>
-        <div class="card" id="form-cliente" style="display:none;margin-bottom:1rem">
-          <div class="form-row">
-            <div class="form-group" style="max-width:220px">
-              <label>RUC / CI</label>
-              <div class="ruc-wrap">
-                <input type="text" id="c-ruc-base" placeholder="4889914">
-                <div class="ruc-sep">-</div>
-                <input type="text" id="c-ruc-dv" placeholder="3" maxlength="1">
-              </div>
-            </div>
-            <div class="form-group"><label>Nombre / Razón social</label><input type="text" id="c-nombre" placeholder="Nahuel Bareiro"></div>
-            <div class="form-actions">
-              <button class="btn btn-primary" onclick="agregarCliente()"><i class="ti ti-check"></i> Guardar</button>
-              <button class="btn btn-ghost" onclick="ocultarFormCliente()"><i class="ti ti-x"></i></button>
-            </div>
+      <div id="v-lista">
+        <div class="phdr"><div><h1 class="ptitle">Clientes</h1><span class="psub">Seleccioná un cliente para ver sus facturas</span></div><button class="btn btn-p" onclick="mostrarForm()"><i class="ti ti-plus"></i> Nuevo</button></div>
+        <div class="card" id="form-c" style="display:none;margin-bottom:1rem">
+          <div class="frow">
+            <div class="fg" style="max-width:220px"><label>RUC / CI</label><div class="rucw"><input type="text" id="c-base" placeholder="4889914"><div class="rucs">-</div><input type="text" id="c-dv" placeholder="3" maxlength="1"></div></div>
+            <div class="fg"><label>Nombre / Razón social</label><input type="text" id="c-nom" placeholder="Nahuel Bareiro"></div>
+            <div class="fa"><button class="btn btn-p" onclick="addCliente()"><i class="ti ti-check"></i> Guardar</button><button class="btn btn-g" onclick="ocultarForm()"><i class="ti ti-x"></i></button></div>
           </div>
         </div>
-        <div id="clientes-grid" class="clientes-grid"></div>
+        <div id="cgrid" class="cgrid"></div>
       </div>
-      <div id="vista-perfil-cliente" style="display:none">
-        <button class="btn btn-ghost" style="margin-bottom:1.25rem" onclick="volverLista()"><i class="ti ti-arrow-left"></i> Volver</button>
-        <div class="perfil-header">
-          <div class="perfil-avatar" id="perfil-avatar"></div>
-          <div class="perfil-info"><div class="perfil-nombre" id="perfil-nombre"></div><div class="perfil-ruc" id="perfil-ruc"></div></div>
-          <div class="perfil-stats">
-            <div class="stat-pill stat-green"><i class="ti ti-arrow-up-right"></i> <span id="perfil-total-ventas">Gs. 0</span></div>
-            <div class="stat-pill stat-red"><i class="ti ti-arrow-down-left"></i> <span id="perfil-total-compras">Gs. 0</span></div>
-          </div>
+      <div id="v-perfil" style="display:none">
+        <button class="btn btn-g" style="margin-bottom:1.25rem" onclick="volverLista()"><i class="ti ti-arrow-left"></i> Volver</button>
+        <div class="phdr2">
+          <div class="pava" id="p-ava"></div>
+          <div><div class="pnom" id="p-nom"></div><div class="pruc" id="p-ruc"></div></div>
+          <div class="pstats"><div class="sp spg"><i class="ti ti-arrow-up-right"></i><span id="p-tv">Gs. 0</span></div><div class="sp spr"><i class="ti ti-arrow-down-left"></i><span id="p-tc">Gs. 0</span></div></div>
         </div>
-        <div class="perfil-tabs">
-          <button class="perfil-tab active" onclick="perfilTab('historial',this)"><i class="ti ti-list"></i> Historial</button>
-          <button class="perfil-tab" onclick="perfilTab('nueva',this)"><i class="ti ti-plus"></i> Nueva factura</button>
+        <div class="ptabs">
+          <button class="ptab active" onclick="pTab('hist',this)"><i class="ti ti-list"></i> Historial</button>
+          <button class="ptab" onclick="pTab('nueva',this)"><i class="ti ti-plus"></i> Nueva factura</button>
         </div>
-        <div id="perfil-historial">
-          <div class="historial-controls">
-            <div class="tipo-tabs">
-              <button class="tipo-tab active" onclick="setHistorialFilter('todos',this)">Todos</button>
-              <button class="tipo-tab" onclick="setHistorialFilter('venta',this)"><i class="ti ti-arrow-up-right"></i> Ventas</button>
-              <button class="tipo-tab" onclick="setHistorialFilter('compra',this)"><i class="ti ti-arrow-down-left"></i> Compras</button>
+        <div id="p-hist">
+          <div class="hctrl">
+            <div class="ttabs">
+              <button class="ttab active" onclick="setHFilter('todos',this)">Todos</button>
+              <button class="ttab" onclick="setHFilter('venta',this)"><i class="ti ti-arrow-up-right"></i> Ventas</button>
+              <button class="ttab" onclick="setHFilter('compra',this)"><i class="ti ti-arrow-down-left"></i> Compras</button>
             </div>
-            <input type="month" id="historial-mes" onchange="renderPerfilHistorial()">
+            <input type="month" id="h-mes" onchange="renderHist()">
           </div>
-          <div id="perfil-facturas-lista"></div>
+          <div id="p-facturas"></div>
         </div>
-        <div id="perfil-nueva" style="display:none">
+        <div id="p-nueva" style="display:none">
           <div class="card">
-            <div class="form-row" style="margin-bottom:.75rem">
-              <div class="form-group"><label>Tipo</label><select id="pf-tipo"><option value="venta">Venta (emitida)</option><option value="compra">Compra (recibida)</option></select></div>
-              <div class="form-group">
-                <label class="label-row">Timbrado <button class="btn-link" onclick="toggleTimbradoPerfil()">+ Agregar nuevo</button></label>
-                <select id="pf-timbrado"><option value="">— Sin timbrado —</option></select>
-              </div>
-              <div class="form-group">
-                <label>N° Factura</label>
-                <input type="text" id="pf-nro" placeholder="001001684" oninput="onNroInputPerfil(this)" onblur="onNroBlurPerfil(this)" maxlength="17" autocomplete="off">
-                <div class="nro-preview" id="pf-nro-preview"></div>
-              </div>
-              <div class="form-group"><label>Fecha</label><input type="date" id="pf-fecha"></div>
+            <div class="frow" style="margin-bottom:.75rem">
+              <div class="fg"><label>Tipo</label><select id="pf-tipo"><option value="venta">Venta</option><option value="compra">Compra</option></select></div>
+              <div class="fg"><label class="lblr">Timbrado <button class="btn-lnk" onclick="toggleTinl()">+ Agregar</button></label><select id="pf-tim"><option value="">— Sin timbrado —</option></select></div>
+              <div class="fg"><label>N° Factura</label><input type="text" id="pf-nro" placeholder="001001684" oninput="onNro(this)" onblur="onNroBlur(this)" maxlength="17" autocomplete="off"><div class="nrp" id="pf-nrp"></div></div>
+              <div class="fg"><label>Fecha</label><input type="date" id="pf-fecha"></div>
             </div>
-            <div class="timbrado-inline" id="pf-timbrado-inline">
-              <p class="inline-title">Nuevo timbrado</p>
-              <div class="form-row">
-                <div class="form-group"><label>Número</label><input type="text" id="pnt-nro" placeholder="12345678" maxlength="8"></div>
-                <div class="form-group"><label>Inicio</label><input type="date" id="pnt-inicio"></div>
-                <div class="form-group"><label>Fin</label><input type="date" id="pnt-fin"></div>
-                <div class="form-actions">
-                  <button class="btn btn-primary btn-sm" onclick="agregarTimbradoPerfil()"><i class="ti ti-check"></i></button>
-                  <button class="btn btn-ghost btn-sm" onclick="toggleTimbradoPerfil()"><i class="ti ti-x"></i></button>
-                </div>
+            <div class="tinl" id="pf-tinl">
+              <p class="tit">Nuevo timbrado</p>
+              <div class="frow">
+                <div class="fg"><label>Número</label><input type="text" id="pnt-n" placeholder="12345678" maxlength="8"></div>
+                <div class="fg"><label>Inicio</label><input type="date" id="pnt-i"></div>
+                <div class="fg"><label>Fin</label><input type="date" id="pnt-f"></div>
+                <div class="fa"><button class="btn btn-p btn-sm" onclick="addTinl()"><i class="ti ti-check"></i></button><button class="btn btn-g btn-sm" onclick="toggleTinl()"><i class="ti ti-x"></i></button></div>
               </div>
             </div>
-            <div class="total-row"><label>Total factura</label><input type="number" id="pf-total" placeholder="0" oninput="recalcularPerfil()"></div>
-            <table class="montos-table">
+            <div class="trow"><label>Total factura</label><input type="number" id="pf-tot" placeholder="0" oninput="recalc()"></div>
+            <table class="mtable">
               <thead><tr><th></th><th>Monto c/IVA</th><th>Gravada s/IVA</th><th>IVA</th></tr></thead>
               <tbody>
-                <tr><td class="monto-label">Exenta</td><td><input type="number" id="pf-exenta" placeholder="0" oninput="recalcularPerfil()"></td><td><span class="calc-val" id="pr-exenta-grav">—</span></td><td><span class="calc-val" id="pr-exenta-iva">—</span></td></tr>
-                <tr><td class="monto-label">IVA 10% <button class="reset-auto" id="pf-btn-reset" style="display:none" onclick="resetAutoPerfil()">↺ auto</button></td><td><input type="number" id="pf-g10" placeholder="automático" oninput="onPfG10Input()"></td><td><span class="calc-val" id="pr-g10-grav">—</span></td><td><span class="calc-val" id="pr-g10-iva">—</span></td></tr>
-                <tr><td class="monto-label">IVA 5%</td><td><input type="number" id="pf-g5" placeholder="0" oninput="recalcularPerfil()"></td><td><span class="calc-val" id="pr-g5-grav">—</span></td><td><span class="calc-val" id="pr-g5-iva">—</span></td></tr>
+                <tr><td class="mlbl">Exenta</td><td><input type="number" id="pf-ex" placeholder="0" oninput="recalc()"></td><td><span class="cv" id="r-ex-g">—</span></td><td><span class="cv" id="r-ex-i">—</span></td></tr>
+                <tr><td class="mlbl">IVA 10% <button class="rst-auto" id="pf-rst" style="display:none" onclick="rstAuto()">↺ auto</button></td><td><input type="number" id="pf-g10" placeholder="automático" oninput="onG10()"></td><td><span class="cv" id="r-g10-g">—</span></td><td><span class="cv" id="r-g10-i">—</span></td></tr>
+                <tr><td class="mlbl">IVA 5%</td><td><input type="number" id="pf-g5" placeholder="0" oninput="recalc()"></td><td><span class="cv" id="r-g5-g">—</span></td><td><span class="cv" id="r-g5-i">—</span></td></tr>
               </tbody>
             </table>
-            <div class="falta-box" id="pf-falta-box"></div>
-            <div class="resumen-box">
-              <div class="resumen-item"><p class="resumen-label">Total IVA</p><p id="pr-iva-total" class="resumen-val">Gs. 0</p></div>
-              <div class="resumen-item"><p class="resumen-label">Total distribuido</p><p id="pr-distribuido" class="resumen-val">Gs. 0</p></div>
-              <div class="resumen-item"><p class="resumen-label">Total factura</p><p id="pr-total-final" class="resumen-val resumen-big">Gs. 0</p></div>
+            <div class="fb" id="pf-fb"></div>
+            <div class="resbox">
+              <div><p class="rlbl">Total IVA</p><p id="r-iva" class="rval">Gs. 0</p></div>
+              <div><p class="rlbl">Distribuido</p><p id="r-dist" class="rval">Gs. 0</p></div>
+              <div><p class="rlbl">Total factura</p><p id="r-tot" class="rval rbig">Gs. 0</p></div>
             </div>
-            <button class="btn btn-primary" onclick="guardarFacturaPerfil()"><i class="ti ti-device-floppy"></i> Guardar factura</button>
+            <button class="btn btn-p" onclick="saveFactura()"><i class="ti ti-device-floppy"></i> Guardar factura</button>
           </div>
         </div>
       </div>
     </div>
 
     <div id="tab-timbrados" class="section">
-      <div class="page-header"><h1 class="page-title">Timbrados</h1><span class="page-sub">Los vencidos no aparecen al cargar facturas</span></div>
+      <div class="phdr"><h1 class="ptitle">Timbrados</h1><span class="psub">Los vencidos no aparecen al cargar facturas</span></div>
       <div class="card" style="margin-bottom:1rem">
-        <div class="form-row">
-          <div class="form-group"><label>Número</label><input type="text" id="t-nro" placeholder="12345678" maxlength="8"></div>
-          <div class="form-group"><label>Inicio de vigencia</label><input type="date" id="t-inicio"></div>
-          <div class="form-group"><label>Fin de vigencia</label><input type="date" id="t-fin"></div>
-          <div class="form-actions"><button class="btn btn-primary" onclick="agregarTimbrado()"><i class="ti ti-plus"></i> Guardar</button></div>
+        <div class="frow">
+          <div class="fg"><label>Número</label><input type="text" id="t-n" placeholder="12345678" maxlength="8"></div>
+          <div class="fg"><label>Inicio de vigencia</label><input type="date" id="t-i"></div>
+          <div class="fg"><label>Fin de vigencia</label><input type="date" id="t-f"></div>
+          <div class="fa"><button class="btn btn-p" onclick="addTimbrado()"><i class="ti ti-plus"></i> Guardar</button></div>
         </div>
       </div>
-      <div id="lista-timbrados"><p class="empty-state">No hay timbrados aún.</p></div>
+      <div id="lista-t"><p class="empty">No hay timbrados aún.</p></div>
     </div>
 
     <div id="tab-facturas" class="section">
-      <div class="page-header"><h1 class="page-title">Todas las facturas</h1></div>
-      <div class="filter-bar">
-        <select id="f-filtro-tipo" onchange="renderFacturas()"><option value="">Todos los tipos</option><option value="venta">Ventas</option><option value="compra">Compras</option></select>
-        <select id="f-filtro-cliente" onchange="renderFacturas()"><option value="">Todos los clientes</option></select>
-        <input type="month" id="f-filtro-mes" onchange="renderFacturas()">
+      <div class="phdr"><h1 class="ptitle">Todas las facturas</h1></div>
+      <div class="fbar">
+        <select id="ff-tipo" onchange="renderFacturas()"><option value="">Todos los tipos</option><option value="venta">Ventas</option><option value="compra">Compras</option></select>
+        <select id="ff-cli" onchange="renderFacturas()"><option value="">Todos los clientes</option></select>
+        <input type="month" id="ff-mes" onchange="renderFacturas()">
       </div>
-      <div id="lista-facturas"><p class="empty-state">No hay facturas aún.</p></div>
-      <div id="resumen-filtrado"></div>
+      <div id="lista-f"><p class="empty">No hay facturas aún.</p></div>
+      <div id="f-resumen"></div>
     </div>
 
     <div id="tab-usuarios" class="section">
-      <div class="page-header"><div><h1 class="page-title">Usuarios</h1><span class="page-sub">Gestioná quién puede acceder al sistema</span></div></div>
+      <div class="phdr"><div><h1 class="ptitle">Usuarios</h1><span class="psub">Gestioná quién puede acceder al sistema</span></div></div>
       <div class="card" style="margin-bottom:1.5rem">
-        <p class="card-title">Crear nuevo usuario</p>
-        <div class="form-row">
-          <div class="form-group"><label>Email</label><input type="email" id="u-email" placeholder="nuevo@email.com"></div>
-          <div class="form-group"><label>Contraseña</label><input type="password" id="u-password" placeholder="Mínimo 6 caracteres"></div>
-          <div class="form-actions"><button class="btn btn-primary" onclick="crearUsuario()"><i class="ti ti-user-plus"></i> Crear</button></div>
+        <p class="ctitle">Crear nuevo usuario</p>
+        <div class="frow">
+          <div class="fg"><label>Email</label><input type="email" id="u-email" placeholder="nuevo@email.com"></div>
+          <div class="fg"><label>Contraseña</label><input type="password" id="u-pass" placeholder="Mínimo 6 caracteres"></div>
+          <div class="fa"><button class="btn btn-p" onclick="crearUsuario()"><i class="ti ti-user-plus"></i> Crear</button></div>
         </div>
         <div id="u-msg" style="margin-top:.75rem;font-size:13px;display:none"></div>
-        <div class="info-box" style="margin-top:1rem"><i class="ti ti-info-circle"></i> El usuario nuevo podrá iniciar sesión de inmediato.</div>
+        <div class="ibox" style="margin-top:1rem"><i class="ti ti-info-circle"></i> El usuario puede iniciar sesión de inmediato.</div>
       </div>
-      <div id="lista-usuarios"></div>
     </div>
 
   </main>
