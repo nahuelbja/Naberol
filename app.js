@@ -1,4 +1,4 @@
-// naberol. Contable — app.js (clean)
+// naberol. Contable — app.js
 const SB_URL = 'https://sxwbfqaufvzbenfvffjl.supabase.co'
 const SB_KEY = 'sb_publishable_752-wqS5XqsKWlqKhqg_MA_v1YAakcf'
 const { createClient } = supabase
@@ -18,17 +18,16 @@ const estTim=t=>{if(hoy>t.fin)return'ven';return(new Date(t.fin)-new Date(hoy))/
 const inic=n=>n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()
 const fmtNro=raw=>{const d=raw.replace(/\D/g,'');if(!d)return'';const p1=d.slice(0,3).padStart(3,'0');const p2=(d.length>3?d.slice(3,6):'001').padStart(3,'0');const p3=d.slice(6,13).padStart(7,'0');if(d.length<=3)return p1;if(d.length<=6)return p1+'-'+p2;return p1+'-'+p2+'-'+p3}
 
-// ── Screen manager ── THE KEY FUNCTION
+// ── Screen manager ──
+// Cada pantalla recibe display:flex (todas usan layout flex)
+// Esto garantiza que nunca se superpongan
+const SCREENS = ['s-loading','s-login','s-home','s-app']
+
 function show(id) {
-  // hide all screens
-  document.getElementById('s-loading').style.display='none'
-  document.getElementById('s-login').style.display='none'
-  document.getElementById('s-home').style.display='none'
-  document.getElementById('s-app').style.display='none'
-  // show target
-  const el=document.getElementById(id)
-  if(id==='s-login'||id==='s-home') el.style.display='flex'
-  else el.style.display='block'
+  SCREENS.forEach(sid => {
+    document.getElementById(sid).style.display = 'none'
+  })
+  document.getElementById(id).style.display = 'flex'
 }
 
 // ── Init ──
