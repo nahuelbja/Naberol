@@ -13,6 +13,7 @@ let clientes = []
 let timbrados = []
 let facturas = []
 let clienteActivo = null
+let currentUser = null
 let pfAutoMode = true
 let historialFiltroTipo = 'todos'
 const hoy = new Date().toISOString().split('T')[0]
@@ -45,13 +46,12 @@ async function init() {
   try {
     const { data: { user } } = await db.auth.getUser()
     if (!user) { showLoginScreen(); return }
-    document.getElementById('login-screen').classList.remove('visible')
+    currentUser = user
     document.getElementById('nav-user-email').textContent = user.email
+    document.getElementById('home-user-email').textContent = user.email
     await cargarDatos()
     document.getElementById('loading').style.display = 'none'
-    document.getElementById('app').style.display = 'block'
-    renderDashboard()
-    renderClientesGrid()
+    showHome()
   } catch(err) {
     document.querySelector('.loading-sub').textContent = 'Error al conectar. Recargá la página.'
   }
@@ -59,8 +59,56 @@ async function init() {
 
 function showLoginScreen() {
   document.getElementById('loading').style.display = 'none'
-  document.getElementById('login-screen').classList.add('visible')
+  document.getElementById('login-screen').style.display = 'flex'
 }
+
+function showHome() {
+  document.getElementById('login-screen').style.display = 'none'
+  document.getElementById('app').style.display = 'none'
+  const hs = document.getElementById('home-screen')
+  hs.style.display = 'flex'
+  hs.classList.remove('scene-fade-out')
+  hs.classList.add('scene-fade-in')
+  updateHomeStats()
+}
+
+function enterSection(section) {
+  const hs = document.getElementById('home-screen')
+  hs.classList.add('scene-fade-out')
+  setTimeout(() => {
+    hs.style.display = 'none'
+    hs.classList.remove('scene-fade-out', 'scene-fade-in')
+    document.getElementById('app').style.display = 'block'
+    const btn = document.querySelector(\`.nav-btn[onclick*="'\${section}'"]\`)
+    showTab(section, btn || document.querySelector('.nav-btn'))
+  }, 250)
+}
+
+function goHome() {
+  document.getElementById('app').style.display = 'none'
+  showHome()
+}
+
+function updateHomeStats() {
+  const ventas = facturas.filter(f=>f.tipo==='venta')
+  const compras = facturas.filter(f=>f.tipo==='compra')
+  const tvTotal = ventas.reduce((a,f)=>a+calcIVA(f).total,0)
+  const tcTotal = compras.reduce((a,f)=>a+calcIVA(f).total,0)
+  const timV = timbrados.filter(t=>estadoTimbrado(t)!=='vencido').length
+  // Greeting by time
+  const h = new Date().getHours()
+  const greet = h < 12 ? 'Buenos días' : h < 19 ? 'Buenas tardes' : 'Buenas noches'
+  document.getElementById('home-greeting-text').textContent = greet + '.'
+  document.getElementById('home-quick-stats').innerHTML = \`
+    <div class="home-stat-chip"><i class="ti ti-arrow-up-right" style="color:var(--green)"></i> Ventas <span class="hsc-val">Gs. \${fmt(tvTotal)}</span></div>
+    <div class="home-stat-chip"><i class="ti ti-arrow-down-left" style="color:var(--danger-text)"></i> Compras <span class="hsc-val">Gs. \${fmt(tcTotal)}</span></div>
+    <div class="home-stat-chip"><i class="ti ti-users"></i> <span class="hsc-val">\${clientes.length}</span> clientes</div>
+    <div class="home-stat-chip"><i class="ti ti-file-invoice"></i> <span class="hsc-val">\${facturas.length}</span> facturas</div>
+    <div class="home-stat-chip"><i class="ti ti-stamp"></i> <span class="hsc-val">\${timV}</span> timbrado\${timV!==1?'s':''} vigentes</div>
+  \`
+}
+
+
 
 async function login() {
   const email = document.getElementById('login-email').value.trim()
@@ -78,7 +126,7 @@ async function login() {
     btn.disabled = false
     return
   }
-  document.getElementById('login-screen').classList.remove('visible')
+  document.getElementById('login-screen').style.display = 'none'
   document.getElementById('loading').style.display = 'flex'
   await init()
 }
