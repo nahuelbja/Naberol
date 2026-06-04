@@ -24,26 +24,62 @@
 
 <!-- LOGIN -->
 <div id="login-screen" style="display:none">
-  <div class="login-wrap">
+  <div class="login-bg">
+    <div class="login-orb login-orb-1"></div>
+    <div class="login-orb login-orb-2"></div>
+    <div class="login-orb login-orb-3"></div>
+    <div class="login-grid"></div>
+  </div>
+  <div class="login-left">
+    <div class="login-left-inner">
+      <div class="login-brand-logo">
+        <svg viewBox="0 0 120 120" width="88" height="88" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="ng1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#4F99FF"/>
+              <stop offset="100%" stop-color="#1E7AF5"/>
+            </linearGradient>
+            <linearGradient id="ng2" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1E7AF5"/>
+              <stop offset="100%" stop-color="#0A4BA6"/>
+            </linearGradient>
+          </defs>
+          <path d="M16,14 Q12,14 12,18 L12,102 Q12,106 16,106 L30,106 Q34,106 34,102 L34,46 L82,104 Q84,106 88,106 L104,106 Q108,106 108,102 L108,18 Q108,14 104,14 L90,14 Q86,14 86,18 L86,74 L38,16 Q36,14 32,14 Z" fill="url(#ng1)"/>
+          <path d="M20,18 L20,102 L34,102 L34,46 L82,104 L86,104 L86,74 L38,16 Z" fill="url(#ng2)" opacity="0.25"/>
+        </svg>
+      </div>
+      <div class="login-wordmark">naberol.</div>
+      <div class="login-tagline">Claridad fiscal, con diseño.</div>
+      <div class="login-features">
+        <div class="login-feat"><i class="ti ti-check"></i> Gestión de clientes y facturas</div>
+        <div class="login-feat"><i class="ti ti-check"></i> IVA 10%, 5% y exentas automático</div>
+        <div class="login-feat"><i class="ti ti-check"></i> Dashboard con resúmenes en tiempo real</div>
+        <div class="login-feat"><i class="ti ti-check"></i> Multi-usuario con acceso por contraseña</div>
+      </div>
+      <div class="login-footer-text">Sistema contable · Asunción, Paraguay · 2026</div>
+    </div>
+  </div>
+  <div class="login-right">
     <div class="login-card">
-      <div class="login-logo">
-        <svg width="36" height="36" viewBox="0 0 32 32"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
+      <div class="login-card-logo">
+        <svg viewBox="0 0 32 32" width="28" height="28"><rect width="32" height="32" rx="8" fill="#061A3A" stroke="#1E7AF5" stroke-width="1.5"/><path d="M8,6 L8,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M8,6 L24,26" stroke="#1E7AF5" stroke-width="3.5"/><path d="M24,6 L24,26" stroke="#4F99FF" stroke-width="3.5"/></svg>
         <span>naberol.</span>
       </div>
-      <h2 class="login-title">Iniciá sesión</h2>
-      <p class="login-sub">Sistema contable · Asunción, Paraguay</p>
-      <div class="form-group" style="margin-bottom:.75rem">
+      <p class="login-card-title">Iniciá sesión</p>
+      <p class="login-card-sub">Ingresá tus credenciales para acceder al sistema</p>
+      <div class="form-group" style="margin-bottom:.85rem">
         <label>Email</label>
         <input type="email" id="login-email" placeholder="tu@email.com" onkeydown="if(event.key==='Enter')login()">
       </div>
-      <div class="form-group" style="margin-bottom:1rem">
+      <div class="form-group" style="margin-bottom:1.25rem">
         <label>Contraseña</label>
         <input type="password" id="login-password" placeholder="••••••••" onkeydown="if(event.key==='Enter')login()">
       </div>
       <div id="login-error" class="login-error" style="display:none"></div>
-      <button class="btn btn-primary" style="width:100%;justify-content:center;padding:10px" onclick="login()" id="login-btn">
-        <i class="ti ti-login"></i> Ingresar
+      <button class="btn-login" onclick="login()" id="login-btn">
+        <i class="ti ti-login"></i> Ingresar al sistema
       </button>
+      <p class="login-powered">naberol. Contable © 2026</p>
     </div>
   </div>
 </div>
