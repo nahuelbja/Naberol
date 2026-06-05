@@ -33,14 +33,15 @@ function show(id) {
 // ── Init ──
 async function init() {
   try {
-    const {data:{user}}=await db.auth.getUser()
-    if(!user){show('s-login');return}
-    setUser(user)
+    // getSession() lee de localStorage sin llamada de red — más confiable
+    const {data:{session}}=await db.auth.getSession()
+    if(!session){show('s-login');return}
+    setUser(session.user)
     await loadData()
     show('s-home')
     updateHomeStats()
   } catch(e) {
-    document.querySelector('.ls').textContent='Error al conectar. Recargá la página.'
+    show('s-login')
   }
 }
 
@@ -68,10 +69,9 @@ async function doLogin() {
   err.style.display='none'
   if(!email||!pass){err.textContent='Completá email y contraseña.';err.style.display='block';return}
   btn.textContent='Ingresando...';btn.disabled=true
-  const {error}=await db.auth.signInWithPassword({email,password:pass})
+  const {data,error}=await db.auth.signInWithPassword({email,password:pass})
   if(error){err.textContent='Email o contraseña incorrectos.';err.style.display='block';btn.innerHTML='<i class="ti ti-login"></i> Ingresar al sistema';btn.disabled=false;return}
-  const {data:{user}}=await db.auth.getUser()
-  setUser(user)
+  setUser(data.user)
   await loadData()
   show('s-home')
   updateHomeStats()
@@ -449,4 +449,12 @@ async function crearUsuario() {
 }
 
 // ── Start ──
+// Listener de cambios de auth — captura SIGNED_IN, SIGNED_OUT, TOKEN_REFRESHED
+db.auth.onAuthStateChange((event, session) => {
+  if(event==='SIGNED_OUT'||event==='USER_DELETED'){
+    clientes=[];timbrados=[];facturas=[];activeCliente=null
+    show('s-login')
+  }
+})
+
 init()
