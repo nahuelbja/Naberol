@@ -19,15 +19,11 @@ const inic=n=>n.split(' ').slice(0,2).map(w=>w[0]).join('').toUpperCase()
 const fmtNro=raw=>{const d=raw.replace(/\D/g,'');if(!d)return'';const p1=d.slice(0,3).padStart(3,'0');const p2=(d.length>3?d.slice(3,6):'001').padStart(3,'0');const p3=d.slice(6,13).padStart(7,'0');if(d.length<=3)return p1;if(d.length<=6)return p1+'-'+p2;return p1+'-'+p2+'-'+p3}
 
 // ── Screen manager ──
-// Cada pantalla recibe display:flex (todas usan layout flex)
-// Esto garantiza que nunca se superpongan
-const SCREENS = ['s-loading','s-login','s-home','s-app']
-
+// Sistema basado en clases .active — más confiable que inline styles
+// .screen { display:none !important } en CSS, .screen.active { display:flex !important }
 function show(id) {
-  SCREENS.forEach(sid => {
-    document.getElementById(sid).style.display = 'none'
-  })
-  document.getElementById(id).style.display = 'flex'
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'))
+  document.getElementById(id).classList.add('active')
 }
 
 // ── Init ──

@@ -4,12 +4,14 @@
 body{font-family:var(--font);background:var(--ink);color:var(--t);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
 /* ── Screens: one at a time, never overlap ── */
-.screen{display:none}
+/* !important para que ningún inline style pueda interferir */
+.screen{display:none!important}
+.screen.active{display:flex!important}
 @keyframes fi{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
 @keyframes orb{0%,100%{transform:translate(0,0)}50%{transform:translate(18px,-22px)}}
 
 /* LOADING */
-#s-loading{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:1rem}
+#s-loading{flex-direction:column;align-items:center;justify-content:center;height:100vh;gap:1rem}
 .ll{display:flex;align-items:center;gap:10px;font-size:22px;font-weight:700;letter-spacing:-.02em}
 .ls{font-size:13px;color:var(--tu)}
 
