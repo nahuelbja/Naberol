@@ -445,12 +445,9 @@ async function crearUsuario() {
 }
 
 // ── Start ──
-// Listener de cambios de auth — captura SIGNED_IN, SIGNED_OUT, TOKEN_REFRESHED
-db.auth.onAuthStateChange((event, session) => {
-  if(event==='SIGNED_OUT'||event==='USER_DELETED'){
-    clientes=[];timbrados=[];facturas=[];activeCliente=null
-    show('s-login')
-  }
+document.addEventListener('mousemove', e => {
+  document.documentElement.style.setProperty('--mx', e.clientX + 'px')
+  document.documentElement.style.setProperty('--my', e.clientY + 'px')
 })
 
 init()

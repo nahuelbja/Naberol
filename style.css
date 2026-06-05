@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Geist+Mono:wght@400;500&display=swap');
-:root{--ink:#061A3A;--blue:#1E7AF5;--bl:#4F99FF;--green:#00B37A;--amber:#F59E0B;--purple:#7C5CFF;--danger:#FF6B6B;--t:rgba(255,255,255,1);--tm:rgba(255,255,255,0.75);--ts:rgba(255,255,255,0.45);--tu:rgba(255,255,255,0.25);--border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);--ch:rgba(255,255,255,0.08);--inp:rgba(255,255,255,0.07);--font:'Geist','Inter',sans-serif;--mono:'Geist Mono',monospace;--r:10px;--rs:6px;--rl:14px;--ease:cubic-bezier(0.16,1,0.3,1)}
+:root{--ink:#061A3A;--blue:#1E7AF5;--bl:#4F99FF;--green:#00B37A;--amber:#F59E0B;--purple:#7C5CFF;--danger:#FF6B6B;--t:rgba(255,255,255,1);--tm:rgba(255,255,255,0.75);--ts:rgba(255,255,255,0.45);--tu:rgba(255,255,255,0.25);--border:rgba(255,255,255,0.09);--card:rgba(255,255,255,0.04);--ch:rgba(255,255,255,0.08);--inp:rgba(255,255,255,0.07);--font:'Geist','Inter',sans-serif;--mono:'Geist Mono',monospace;--r:10px;--rs:6px;--rl:14px;--ease:cubic-bezier(0.16,1,0.3,1);--mx:50%;--my:50%}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:var(--font);background:var(--ink);color:var(--t);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 
@@ -101,8 +101,9 @@ body{font-family:var(--font);background:var(--ink);color:var(--t);min-height:100
 .nb-right{margin-left:auto;display:flex;align-items:center;gap:.75rem}
 .nb-email{font-size:11px;color:var(--tu);font-family:var(--mono)}
 .main{max-width:1080px;margin:0 auto;padding:2rem 1.5rem}
-.section{display:none;animation:fi .3s var(--ease)}
-.section.active{display:block}
+.section{display:none}
+.section.active{display:block;animation:fi .25s ease forwards}
+.cglow{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle 380px at var(--mx) var(--my),rgba(30,122,245,0.06),transparent 70%)}
 .phdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
 .ptitle{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-bottom:2px}
 .psub{font-size:12px;color:var(--tu);display:block}
